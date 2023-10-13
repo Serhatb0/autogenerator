@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Java Class Generator</title>
+    <!-- Bootstrap CSS eklentisi -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Java Class Generator</h1>
+
+        <form th:object="${classInfo}" th:action="@{/dowloandJava}" method="post" class="mt-4">
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" id="isLoadMethod" name="isLoadMethod" class="form-check-input"
+                        th:field="*{loadMethod}">
+                    <label class="form-check-label" for="isLoadMethod">Load Method</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" id="isSaveMethod" name="isSaveMethod" class="form-check-input"
+                        th:field="*{saveMethod}">
+                    <label class="form-check-label" for="isSaveMethod">Save Method</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" id="isUpdateMethod" name="isUpdateMethod" class="form-check-input"
+                        th:field="*{updateMethod}">
+                    <label class="form-check-label" for="isUpdateMethod">Update Method</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" id="isDeleteMethod" name="isDeleteMethod" class="form-check-input"
+                        th:field="*{deleteMethod}">
+                    <label class="form-check-label" for="checkbox4">Delete Method</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" id="isFindMethod" name="isFindMethod" class="form-check-input"
+                        th:field="*{findMethod} "  onclick="toggleFieldsInput(this)">
+                    <label class="form-check-label" for="isFindMethod">Find Method</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="className">Class Name:</label>
+                <input type="text" required="required"  id="className" name="className" class="form-control" th:field="*{className}">
+            </div>
+            <div class="form-group">
+                <label for="className">Table Name:</label>
+                <input type="text" required="required" id="tableName" name="tableName" class="form-control" th:field="*{tableName}">
+            </div>
+            <div class="form-group">
+                <label for="className">Table Primary Key:</label>
+                <input required="required" type="text" id="tablePrimaryKey" name="tablePrimaryKey" class="form-control"
+                    th:field="*{tablePrimaryKey}">
+            </div>
+            <div class="form-group">
+                <label for="fields">Fields:</label>
+                <textarea required="required" id="fields" name="fields" class="form-control" rows="3" th:field="*{fields}"></textarea>
+            </div>
+
+            <div class="form-group" id="findMethodNameDiv" style="display: none;">
+                <label for="findMethodName">Find Method Name:</label>
+                <input type="text" id="findMethodNameInput" name="findMethodName" class="form-control" rows="3" th:field="*{findMethodName}" >
+            </div>
+
+            <div class="form-group" id="findFieldsDiv" style="display: none;">
+                <label for="findFields">Find Fields:</label>
+                <textarea id="findFields" name="findFields" class="form-control" rows="3"  th:field="*{findFields}"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Oluştur</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS ve jQuery eklentileri -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function toggleFieldsInput(checkbox){
+            var findMethodNameDiv = document.getElementById('findMethodNameDiv');
+            var findMethodNameInput = document.getElementById('findMethodNameInput');
+            var findFieldsDiv = document.getElementById('findFieldsDiv');
+            var findFields = document.getElementById('findFields');
+
+            if(checkbox.checked){
+                findMethodNameDiv.style.display = 'block';
+                findFieldsDiv.style.display = 'block';
+                findMethodNameInput.setAttribute('required', 'required');
+                findFields.setAttribute('required', 'required');
+
+            }else {
+                findMethodNameDiv.style.display = 'none';
+                findFieldsDiv.style.display = 'none';
+                findMethodNameInput.removeAttribute('required');
+                findFields.removeAttribute('required');
+
+            }
+        }
+
+    </script>
+
+
+</body>
+
+</html>
